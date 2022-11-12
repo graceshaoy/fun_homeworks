@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Grace Shao">
+<meta name="dcterms.date" content="2022-10-16">
+
+<title>Homework 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="vis_hw3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="vis_hw3_files/libs/quarto-html/quarto.js"></script>
+<script src="vis_hw3_files/libs/quarto-html/popper.min.js"></script>
+<script src="vis_hw3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="vis_hw3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="vis_hw3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="vis_hw3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="vis_hw3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="vis_hw3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="vis_hw3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Grace Shao </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 16, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<div class="cell" data-execution_count="533">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="problem-1" class="level1">
+<h1>Problem 1</h1>
+<p><em>The Center for Near Earth Object Studies has collected a database of large, bright objects that have impacted the Earth and were detected by the flashes they made, day or night, in the atmosphere (Fireball and Bolide Data, Center for Near Earth Object Studies). As of Oct 12, 2022 the list has 932 events. This question asks you to create effective visualizations of the distribution of variables related to these fireballs.</em></p>
+<section id="a--" class="level3">
+<h3 class="anchored" data-anchor-id="a--">a) ——————————————————-</h3>
+<p><em>Begin by considering the variables included: Peak Brightness Date Time, Latitude, Longitude, Altitude, Velocity, Velocity Components vx, vy, and vz, Total Radiated Energy, and Calculated Total Impact Energy. Consider the nature of each variable–should we expect the variables to be numerical (discrete or continuous)? Categorical (nominal or ordinal)? Write down what you expect without viewing the storage types of the data</em></p>
+<p>I expect Peak Brightness Date/Time to be numerical (specifically continuous), with its type to be datetime; latitude, longitude, altitude, velocity, vx, vy, vz, total radiated energy, and calculated total impact energy to be numerical (specifically continuous), saved as integers or floats</p>
+</section>
+<section id="b" class="level3">
+<h3 class="anchored" data-anchor-id="b">b) ———————————————————</h3>
+<p><em>Now, read in the data. Rename the variables to Peak.Brightness.Date.Time, Latitude, Longitude, Altitude, Velocity, vx, vy, vz, Total.Radiated.Energy, and Calculated.Total.Impact.Energy for convenience. View the storage types of each variable. Do they match what you expected in Part A? If not, convert the storage types. Note: For now, you can ignore converting the date time types.</em></p>
+<div class="cell" data-execution_count="534">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fireball <span class="op">=</span> pd.read_csv(<span class="st">'cneos_fireball_data.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fireball.columns <span class="op">=</span> [<span class="st">"Peak.Brightness.Date.Time"</span>,<span class="st">'Latitude'</span>,<span class="st">'Longitude'</span>,<span class="st">'Altitude'</span>,<span class="st">'Velocity'</span>,<span class="st">'vx'</span>,<span class="st">'vy'</span>,<span class="st">'vz'</span>,<span class="st">'Total.Radiated.Energy'</span>,<span class="st">'Calculated.Total.Impact.Energy'</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fireball.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="534">
+<pre><code>Index(['Peak.Brightness.Date.Time', 'Latitude', 'Longitude', 'Altitude',
+       'Velocity', 'vx', 'vy', 'vz', 'Total.Radiated.Energy',
+       'Calculated.Total.Impact.Energy'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="535">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fireball</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="535">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Peak.Brightness.Date.Time</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Altitude</th>
+      <th>Velocity</th>
+      <th>vx</th>
+      <th>vy</th>
+      <th>vz</th>
+      <th>Total.Radiated.Energy</th>
+      <th>Calculated.Total.Impact.Energy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-09-15 02:49:02</td>
+      <td>22.7N</td>
+      <td>97.6E</td>
+      <td>31.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.700000e+10</td>
+      <td>0.095</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-09-14 23:31:15</td>
+      <td>40.8N</td>
+      <td>63.4E</td>
+      <td>35.8</td>
+      <td>17.4</td>
+      <td>-13.9</td>
+      <td>-4.3</td>
+      <td>9.5</td>
+      <td>3.200000e+10</td>
+      <td>0.110</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-09-04 03:54:55</td>
+      <td>20.0N</td>
+      <td>165.9E</td>
+      <td>14.0</td>
+      <td>21.9</td>
+      <td>18.4</td>
+      <td>-11.4</td>
+      <td>-3.5</td>
+      <td>2.400000e+10</td>
+      <td>0.086</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-08-21 16:35:49</td>
+      <td>6.3S</td>
+      <td>51.5E</td>
+      <td>37.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.100000e+10</td>
+      <td>0.076</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-08-14 07:39:18</td>
+      <td>35.0S</td>
+      <td>78.4E</td>
+      <td>55.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.680000e+11</td>
+      <td>1.200</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>927</th>
+      <td>1993-11-29 17:48:41</td>
+      <td>26.5N</td>
+      <td>78.3E</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.600000e+10</td>
+      <td>0.092</td>
+    </tr>
+    <tr>
+      <th>928</th>
+      <td>1993-10-31 03:39:27</td>
+      <td>51.3N</td>
+      <td>100.9W</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.000000e+10</td>
+      <td>0.130</td>
+    </tr>
+    <tr>
+      <th>929</th>
+      <td>1991-10-04 09:22:47</td>
+      <td>78.7N</td>
+      <td>6.3E</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.500000e+11</td>
+      <td>1.400</td>
+    </tr>
+    <tr>
+      <th>930</th>
+      <td>1990-10-01 03:51:47</td>
+      <td>7.5N</td>
+      <td>142.8E</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.500000e+12</td>
+      <td>5.200</td>
+    </tr>
+    <tr>
+      <th>931</th>
+      <td>1988-04-15 03:03:10</td>
+      <td>4.1S</td>
+      <td>124.3E</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.580000e+12</td>
+      <td>14.000</td>
+    </tr>
+  </tbody>
+</table>
+<p>932 rows × 10 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="536">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fireball.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="536">
+<pre><code>Peak.Brightness.Date.Time          object
+Latitude                           object
+Longitude                          object
+Altitude                          float64
+Velocity                          float64
+vx                                float64
+vy                                float64
+vz                                float64
+Total.Radiated.Energy             float64
+Calculated.Total.Impact.Energy    float64
+dtype: object</code></pre>
+</div>
+</div>
+<p>No, Latitude and Longitude are stored as objects, not integers or floats.</p>
+<div class="cell" data-execution_count="537">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>latitude, longitude <span class="op">=</span> [], []</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> l <span class="kw">in</span> fireball.index:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    lat, <span class="bu">long</span> <span class="op">=</span> fireball[<span class="st">'Latitude'</span>][l], fireball[<span class="st">'Longitude'</span>][l]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(lat) <span class="op">==</span> <span class="bu">float</span>: <span class="co"># all floats in both of these columns are nan values</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        latitude.append(np.nan)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> lat.find(<span class="st">'N'</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        latitude.append(<span class="bu">float</span>(lat[:<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        latitude.append(<span class="op">-</span><span class="bu">float</span>(lat[:<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(<span class="bu">long</span>) <span class="op">==</span> <span class="bu">float</span>:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        longitude.append(np.nan)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">long</span>.find(<span class="st">'W'</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        longitude.append(<span class="bu">float</span>(<span class="bu">long</span>[:<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        longitude.append(<span class="op">-</span><span class="bu">float</span>(<span class="bu">long</span>[:<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>fireball[<span class="st">'Latitude'</span>], fireball[<span class="st">'Longitude'</span>] <span class="op">=</span> latitude, longitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="538">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fireball.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="538">
+<pre><code>Peak.Brightness.Date.Time          object
+Latitude                          float64
+Longitude                         float64
+Altitude                          float64
+Velocity                          float64
+vx                                float64
+vy                                float64
+vz                                float64
+Total.Radiated.Energy             float64
+Calculated.Total.Impact.Energy    float64
+dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="c--" class="level3">
+<h3 class="anchored" data-anchor-id="c--">c) —————————————-</h3>
+<p><em>For visualizing distributions, histograms or cumulative distribution plots are suitable. Plot the distri- bution of longitudes using a histogram, and describe the center, shape, and spread of the distribution. Indicate the presence of any outliers. Is this distribution consistent with what you might expect?</em></p>
+<div class="cell" data-execution_count="539">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">10</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.hist(fireball.Latitude, bins <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Latitude </span><span class="ch">\n</span><span class="st">(&lt;--South | North--&gt;)"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.hist(fireball.Longitude, bins <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Longitude </span><span class="ch">\n</span><span class="st">(&lt;--West | East--&gt;)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="539">
+<pre><code>Text(0.5, 0, 'Longitude \n(&lt;--West | East--&gt;)')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="vis_hw3_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="540">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">7</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span>fireball[<span class="st">'Latitude'</span>])</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span>fireball[<span class="st">'Longitude'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="540">
+<pre><code>&lt;AxesSubplot: xlabel='Longitude'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="vis_hw3_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="541">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fireball.Latitude.describe(), fireball.Longitude.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="541">
+<pre><code>(count    742.000000
+ mean      -1.063477
+ std       37.535938
+ min      -85.000000
+ 25%      -30.900000
+ 50%       -0.950000
+ 75%       28.375000
+ max       88.500000
+ Name: Latitude, dtype: float64,
+ count    742.000000
+ mean      -3.775202
+ std      104.007202
+ min     -180.000000
+ 25%      -95.425000
+ 50%       -3.950000
+ 75%       83.750000
+ max      179.700000
+ Name: Longitude, dtype: float64)</code></pre>
+</div>
+</div>
+<p>The distribution of the latitudes is approximately mound shaped, with a with standard deviation of 37.54, and a mean at -1.06, ranging from -85 to 88, with no outliers. <br> The distribution of the longitudes is approximately uniformly shaped, with a standard deviation of 104, and a mean at -3.78, ranging from -180 to 179.7, with no outliers. <br> This disbribution is consistent with what we expect, because the surface area for sections of longitude are even, but surface areas of sections of latitude decrease as they get further from the equator, so the area for a fireball to land also decreases.</p>
+</section>
+<section id="d" class="level3">
+<h3 class="anchored" data-anchor-id="d">d) ——————————</h3>
+<p><em>Plot the distribution of Total Impact Energies using a histogram, and describe the center, shape, and spread of the distribution. Indicate the presence of any outliers. Is this distribution consistent with what you might expect?</em></p>
+<div class="cell" data-execution_count="542">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.hist(fireball[<span class="st">"Calculated.Total.Impact.Energy"</span>], bins <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Calculated Total Impact Energy (kt)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="542">
+<pre><code>Text(0.5, 0, 'Calculated Total Impact Energy (kt)')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="vis_hw3_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="543">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span>fireball[<span class="st">'Calculated.Total.Impact.Energy'</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Calculated Total Impact Energy (kt)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="543">
+<pre><code>Text(0.5, 0, 'Calculated Total Impact Energy (kt)')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="vis_hw3_files/figure-html/cell-12-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="544">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fireball[<span class="st">"Calculated.Total.Impact.Energy"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="544">
+<pre><code>count    932.000000
+mean       1.230736
+std       14.675072
+min        0.073000
+25%        0.110000
+50%        0.200000
+75%        0.420000
+max      440.000000
+Name: Calculated.Total.Impact.Energy, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="545">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>impact_outliers <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> fireball[<span class="st">"Calculated.Total.Impact.Energy"</span>] <span class="cf">if</span> x <span class="op">&gt;</span> <span class="fl">0.42</span><span class="op">+</span>(<span class="fl">1.5</span>)<span class="op">*</span>(<span class="fl">0.42</span><span class="op">-</span><span class="fl">0.11</span>) ]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(impact_outliers), <span class="bu">max</span>(impact_outliers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="545">
+<pre><code>(111, 440.0)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="546">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(fireball), <span class="bu">len</span>(impact_outliers) <span class="op">/</span> <span class="bu">len</span>(fireball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="546">
+<pre><code>(932, 0.11909871244635194)</code></pre>
+</div>
+</div>
+<p>The distribution of calculated total impact energy is heavily right skewed, with a standard deviation of 14.68 and a center at 1.23, ranging from 0.073 to 440. There are 111 outliers, most notably one at 440. This is consistent with what we expect: there is a lower bound for impact energy but no equivalent upper bound. While high energy impacts are much less common, they do still occur, explaining the right skew. The number of outliers is also consistent with what we expect, based on the standard deviation. The standard deviation is small compared to the range of values, so impact energies outside of a small range is considered an outlier – in this case, about 12% values are outliers.</p>
+</section>
+<section id="e" class="level3">
+<h3 class="anchored" data-anchor-id="e">e) —————————————–</h3>
+<p><em>For right-skewed graphs, a log-scale is often appropriate for visualizing differences in the data. Plot the distribution of transformed Total Impact Energies using a histogram, and describe the center, shape, and spread of the distribution. Indicate the presence of any outliers. Do your findings change from Part D?</em></p>
+<div class="cell" data-execution_count="547">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fireball[<span class="st">'log_impact'</span>] <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(np.log,fireball[<span class="st">"Calculated.Total.Impact.Energy"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="548">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.hist(fireball.log_impact, bins <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Log Calculated Total Impact Energy (kt)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="548">
+<pre><code>Text(0.5, 0, 'Log Calculated Total Impact Energy (kt)')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="vis_hw3_files/figure-html/cell-17-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="515">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fireball.log_impact.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="515">
+<pre><code>count    932.000000
+mean      -1.358434
+std        1.135432
+min       -2.617296
+25%       -2.207275
+50%       -1.609438
+75%       -0.867501
+max        6.086775
+Name: log_impact, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="516">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>log_impact_outliers <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> fireball[<span class="st">"log_impact"</span>] <span class="cf">if</span> x <span class="op">&gt;</span> <span class="op">-</span><span class="fl">0.87</span><span class="op">+</span>(<span class="fl">1.5</span>)<span class="op">*</span>(<span class="op">-</span><span class="fl">0.87</span><span class="op">+</span><span class="fl">2.21</span>)]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(log_impact_outliers), <span class="bu">max</span>(log_impact_outliers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="516">
+<pre><code>(37, 6.0867747269123065)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="518">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(fireball), <span class="bu">len</span>(log_impact_outliers) <span class="op">/</span> <span class="bu">len</span>(fireball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="518">
+<pre><code>(932, 0.03969957081545064)</code></pre>
+</div>
+</div>
+<p>The distribution of calculated total impact energy on the log scale is still heavily right skewed, but much less so than the linear scale. It has a standard deviation of 1.14 and a mean at -1.348, ranging from -2.62 to 6.087, with 37 outliers, most notably one at 6.087. The number of outliers significantly decreases, from 211 to 37, or from 12% to 4%. This decrease is expected when we change from a linear to a log scale, since the log scale compresses large numbers, so for a right-skewed distribution, less large values are categorized as outliers.</p>
+<hr>
+</section>
+</section>
+<section id="problem-2" class="level1">
+<h1>Problem 2</h1>
+<p><em>For this problem, you will create a static visualization from the CDC birth database. The CDC, for fifty years, has been compiling data about each birth in the United States, making most of the data from these standard forms available. This data consists of about 50 fields, almost all of which are categorical data referring to geography, presence of absence of risk factors, method of delivery, duration of gestation, age of parents, date of birth, etc. This will require some amount of effort to wrangle.</em> <br> <em>There are 2-4 million births per year, and, if you desire to examine mortality, around 20,000 infant deaths. The CDC started obfuscating the exact day of birth at some point to maintain privacy. Examine the data, find a fact that is contained within the data, and design a visualization that communicates that fact.</em></p>
+<div class="cell" data-execution_count="437">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>nat <span class="op">=</span> pd.read_csv(<span class="st">'nat2021us.txt'</span>,header<span class="op">=</span><span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="526">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_natality(natalitydata, datadictionary):</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''Take in pandas dataframe natalitydata and list-of-lists datadictionary</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">    (for example [[43, 44, "MATERNALAGE"]] ) and return a pandas dataframe (same </span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">    number of rows) with labeled columns  '''</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    drop <span class="op">=</span> []</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> natalitydata.index:</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> natalitydata[<span class="dv">0</span>][i][:<span class="dv">8</span>] <span class="op">!=</span> <span class="st">'        '</span>:</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>            errors <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>            drop.append(i)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    natalitydata <span class="op">=</span> natalitydata[<span class="op">~</span>natalitydata.index.isin(drop)].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> start, stop, column_name <span class="kw">in</span> datadictionary:</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the first column (start)</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>        df[column_name] <span class="op">=</span> natalitydata[<span class="dv">0</span>].<span class="bu">str</span>.get(start<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the remaining columns</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, stop<span class="op">-</span>start <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>            df[column_name]<span class="op">=</span>  df[column_name].<span class="bu">str</span>.cat(natalitydata[<span class="dv">0</span>].<span class="bu">str</span>.get(start<span class="op">-</span><span class="dv">1</span><span class="op">+</span>i))</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> column_name <span class="kw">in</span> df.columns:</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>        df[column_name] <span class="op">=</span> pd.to_numeric(df[column_name])</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df, errors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="527">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dict2021 <span class="op">=</span> [[<span class="dv">107</span>,<span class="dv">107</span>,<span class="st">'motherRace'</span>],</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">153</span>,<span class="dv">153</span>,<span class="st">'fatherRace'</span>]]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>race_dict <span class="op">=</span> {<span class="dv">1</span>:<span class="st">"White"</span>,<span class="dv">2</span>:<span class="st">"Black"</span>,<span class="dv">3</span>:<span class="st">"Native American"</span>,<span class="dv">4</span>:<span class="st">"Asian"</span>,<span class="dv">5</span>:<span class="st">"Native Hawaiian"</span>,<span class="dv">6</span>:<span class="st">"Multiracial"</span>,<span class="dv">9</span>:<span class="st">"Unknown"</span>}</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>race_reorder <span class="op">=</span> [<span class="st">'Asian'</span>,<span class="st">'Black'</span>,<span class="st">'Native American'</span>,<span class="st">'Native Hawaiian'</span>,<span class="st">'White'</span>,<span class="st">'Multiracial'</span>,<span class="st">'Unknown'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="528">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># natsample = nat[::1000]</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># natsample.columns = [0]</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> nat</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>df,errors <span class="op">=</span> parse_natality(df, dict2021)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'motherRace'</span>] <span class="op">=</span> df[<span class="st">'motherRace'</span>].<span class="bu">map</span>(race_dict)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'fatherRace'</span>] <span class="op">=</span> df[<span class="st">'fatherRace'</span>].<span class="bu">map</span>(race_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="529">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>errors, (errors<span class="op">/</span><span class="bu">len</span>(nat))<span class="op">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="529">
+<pre><code>(111, 0.0030245824986212264)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="549">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>byRace <span class="op">=</span> df[[<span class="st">'motherRace'</span>,<span class="st">'fatherRace'</span>]].groupby(<span class="st">'motherRace'</span>).value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>byRace <span class="op">=</span> pd.DataFrame(byRace)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>byRace.columns <span class="op">=</span> [<span class="st">'frequency'</span>]</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>byRace <span class="op">=</span> byRace.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="550">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # put in order </span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'motherRace'</span>] <span class="op">=</span> byRace[<span class="st">'motherRace'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'fatherRace'</span>] <span class="op">=</span> byRace[<span class="st">'fatherRace'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'motherRace'</span>] <span class="op">=</span> byRace[<span class="st">'motherRace'</span>].cat.set_categories(race_reorder,ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'fatherRace'</span>] <span class="op">=</span> byRace[<span class="st">'fatherRace'</span>].cat.set_categories(race_reorder,ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>byRace.columns <span class="op">=</span> [<span class="st">'Mother'</span>,<span class="st">'Father'</span>,<span class="st">'Frequency'</span>]</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'Count'</span>] <span class="op">=</span> pd.DataFrame(df[[<span class="st">'motherRace'</span>,<span class="st">'fatherRace'</span>]].groupby(<span class="st">'motherRace'</span>).value_counts()).reset_index()[<span class="dv">0</span>] <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'Count'</span>] <span class="op">=</span> byRace[<span class="st">'Count'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="ss">f'</span><span class="sc">{</span>x<span class="sc">:,</span><span class="fl">.2</span><span class="er">f</span><span class="sc">}</span><span class="ss">K Couples'</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>byRace[<span class="st">'Frequency'</span>] <span class="op">=</span> byRace[<span class="st">'Frequency'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f'</span><span class="sc">{</span>x<span class="sc">:.3f}</span><span class="ss">'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="551">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> alt.TitleParams(<span class="st">"Frequency of Father's Race by Mother's Race"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>heatmap <span class="op">=</span> alt.Chart(byRace,title<span class="op">=</span>title).mark_rect(text<span class="op">=</span><span class="st">'Frequency'</span>).encode(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'Mother:O'</span>,sort<span class="op">=</span>race_reorder),y<span class="op">=</span>alt.Y(<span class="st">'Father:O'</span>,sort<span class="op">=</span>race_reorder),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Frequency:Q'</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    tooltip <span class="op">=</span> [alt.Tooltip(<span class="st">'Count'</span>)]</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> <span class="dv">300</span>,</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> <span class="dv">350</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>)<span class="co">#.mark_text()#.encode(text='Frequency')</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> heatmap.mark_text(baseline<span class="op">=</span><span class="st">'middle'</span>).encode(</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span><span class="st">'Frequency'</span>,color<span class="op">=</span>alt.condition(</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>        alt.datum.Frequency <span class="op">&gt;</span> <span class="fl">0.5</span>,</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>        alt.value(<span class="st">'white'</span>),</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>        alt.value(<span class="st">'black'</span>)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>heatmap<span class="op">+</span>text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="551">
+
+<div id="altair-viz-ea7e3de9c1d844b387be95db096d1474"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-ea7e3de9c1d844b387be95db096d1474") {
+      outputDiv = document.getElementById("altair-viz-ea7e3de9c1d844b387be95db096d1474");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": {"type": "rect", "text": "Frequency"}, "encoding": {"color": {"field": "Frequency", "type": "quantitative"}, "tooltip": [{"field": "Count", "type": "nominal"}], "x": {"field": "Mother", "sort": ["Asian", "Black", "Native American", "Native Hawaiian", "White", "Multiracial", "Unknown"], "type": "ordinal"}, "y": {"field": "Father", "sort": ["Asian", "Black", "Native American", "Native Hawaiian", "White", "Multiracial", "Unknown"], "type": "ordinal"}}, "height": 350, "title": {"text": "Frequency of Father's Race by Mother's Race"}, "width": 300}, {"mark": {"type": "text", "baseline": "middle"}, "encoding": {"color": {"condition": {"value": "white", "test": "(datum.Frequency > 0.5)"}, "value": "black"}, "text": {"field": "Frequency", "type": "quantitative"}, "tooltip": [{"field": "Count", "type": "nominal"}], "x": {"field": "Mother", "sort": ["Asian", "Black", "Native American", "Native Hawaiian", "White", "Multiracial", "Unknown"], "type": "ordinal"}, "y": {"field": "Father", "sort": ["Asian", "Black", "Native American", "Native Hawaiian", "White", "Multiracial", "Unknown"], "type": "ordinal"}}, "height": 350, "title": {"text": "Frequency of Father's Race by Mother's Race"}, "width": 300}], "data": {"name": "data-c3ab1e0e47cab282eb9156edac87503c"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-c3ab1e0e47cab282eb9156edac87503c": [{"Mother": "Asian", "Father": "Asian", "Frequency": 0.699, "Count": "158.87K Couples"}, {"Mother": "Asian", "Father": "White", "Frequency": 0.178, "Count": "40.51K Couples"}, {"Mother": "Asian", "Father": "Unknown", "Frequency": 0.077, "Count": "17.50K Couples"}, {"Mother": "Asian", "Father": "Multiracial", "Frequency": 0.023, "Count": "5.33K Couples"}, {"Mother": "Asian", "Father": "Black", "Frequency": 0.02, "Count": "4.46K Couples"}, {"Mother": "Asian", "Father": "Native Hawaiian", "Frequency": 0.002, "Count": "0.37K Couples"}, {"Mother": "Asian", "Father": "Native American", "Frequency": 0.001, "Count": "0.25K Couples"}, {"Mother": "Black", "Father": "Black", "Frequency": 0.619, "Count": "357.55K Couples"}, {"Mother": "Black", "Father": "Unknown", "Frequency": 0.313, "Count": "180.67K Couples"}, {"Mother": "Black", "Father": "White", "Frequency": 0.049, "Count": "28.24K Couples"}, {"Mother": "Black", "Father": "Multiracial", "Frequency": 0.015, "Count": "8.44K Couples"}, {"Mother": "Black", "Father": "Asian", "Frequency": 0.002, "Count": "1.43K Couples"}, {"Mother": "Black", "Father": "Native American", "Frequency": 0.001, "Count": "0.71K Couples"}, {"Mother": "Black", "Father": "Native Hawaiian", "Frequency": 0.0, "Count": "0.27K Couples"}, {"Mother": "Multiracial", "Father": "White", "Frequency": 0.391, "Count": "40.71K Couples"}, {"Mother": "Multiracial", "Father": "Unknown", "Frequency": 0.199, "Count": "20.77K Couples"}, {"Mother": "Multiracial", "Father": "Black", "Frequency": 0.185, "Count": "19.25K Couples"}, {"Mother": "Multiracial", "Father": "Multiracial", "Frequency": 0.175, "Count": "18.25K Couples"}, {"Mother": "Multiracial", "Father": "Asian", "Frequency": 0.031, "Count": "3.19K Couples"}, {"Mother": "Multiracial", "Father": "Native American", "Frequency": 0.01, "Count": "1.09K Couples"}, {"Mother": "Multiracial", "Father": "Native Hawaiian", "Frequency": 0.009, "Count": "0.91K Couples"}, {"Mother": "Native American", "Father": "Unknown", "Frequency": 0.334, "Count": "11.66K Couples"}, {"Mother": "Native American", "Father": "Native American", "Frequency": 0.332, "Count": "11.58K Couples"}, {"Mother": "Native American", "Father": "White", "Frequency": 0.248, "Count": "8.64K Couples"}, {"Mother": "Native American", "Father": "Black", "Frequency": 0.043, "Count": "1.49K Couples"}, {"Mother": "Native American", "Father": "Multiracial", "Frequency": 0.035, "Count": "1.22K Couples"}, {"Mother": "Native American", "Father": "Asian", "Frequency": 0.006, "Count": "0.20K Couples"}, {"Mother": "Native American", "Father": "Native Hawaiian", "Frequency": 0.002, "Count": "0.08K Couples"}, {"Mother": "Native Hawaiian", "Father": "Native Hawaiian", "Frequency": 0.468, "Count": "6.18K Couples"}, {"Mother": "Native Hawaiian", "Father": "Unknown", "Frequency": 0.293, "Count": "3.87K Couples"}, {"Mother": "Native Hawaiian", "Father": "White", "Frequency": 0.12, "Count": "1.58K Couples"}, {"Mother": "Native Hawaiian", "Father": "Black", "Frequency": 0.056, "Count": "0.74K Couples"}, {"Mother": "Native Hawaiian", "Father": "Multiracial", "Frequency": 0.042, "Count": "0.56K Couples"}, {"Mother": "Native Hawaiian", "Father": "Asian", "Frequency": 0.016, "Count": "0.21K Couples"}, {"Mother": "Native Hawaiian", "Father": "Native American", "Frequency": 0.005, "Count": "0.07K Couples"}, {"Mother": "White", "Father": "White", "Frequency": 0.778, "Count": "2,110.84K Couples"}, {"Mother": "White", "Father": "Unknown", "Frequency": 0.161, "Count": "438.09K Couples"}, {"Mother": "White", "Father": "Black", "Frequency": 0.03, "Count": "82.00K Couples"}, {"Mother": "White", "Father": "Multiracial", "Frequency": 0.018, "Count": "47.51K Couples"}, {"Mother": "White", "Father": "Asian", "Frequency": 0.008, "Count": "22.75K Couples"}, {"Mother": "White", "Father": "Native American", "Frequency": 0.003, "Count": "9.18K Couples"}, {"Mother": "White", "Father": "Native Hawaiian", "Frequency": 0.001, "Count": "2.62K Couples"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>The figure depicts data from the CDC’s birth database for 2021, accessed in October of 2022. It covers 3,669,928 births, with 111 erroneously saved data points (from errors such as varying amounts of filler spaces), or about 0.3%. The figure shows that mothers usually have a baby with a father of the same race, except for multiracial mothers, who chose white fathers more often.</p>
+<p>The mothers’ race did not have an “unknown” category, while the fathers’ race did, and it seems Native Americans, Black, and Native Hawaiian mothers are more likely to have a father marked as “unknown”. Mothers usually have a baby with a father of the same race, except for multiracial mothers, who chose white fathers more often. White, Asian, and Black mothers are the most likely to be with a father of the same race. However, this might be due to race distribution in the US – these are three of the largest racial groups, so its more likely that they will find a partner of the same race, while Native American, Native Hawaiian, and multiracial people are less common, so its less likely that a person of any race will be with a person of these three races. It is significant that mothers are more likely to be paired with fathers of the same race – if pairing was random, the frequencies would reflect the population race distribution of the US. Factors that contribute to this pairing relationship include ethnic diasporas, shared experiences, and shared backgrounds within a race. After their own race, mothers of all race were next most likely to be with a white father. This is likely due to a larger white population in the US as well as whiteness being held as the ideal. This graphic was designed as a response to the question “how do couples choose each other in relation to race?” Mother and father races are categorical and nominal, so they were ordered neutrally as categories on the x-y axis. Frequency of the pairings within the mother’s racial group is numerical and continuous, so I choose the color channel to depict this, resulting in a heat map overall. I also chose to show the frequency of pairs within the mother’s racial group rather than frequency within all couples to better depict the relationship between pairs.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
